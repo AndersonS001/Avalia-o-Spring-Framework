@@ -1,17 +1,17 @@
 package br.com.fiap.avaliacaospring.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.avaliacaospring.model.AlunoModel;
 import br.com.fiap.avaliacaospring.service.AlunoService;
 
-@Controller
-@RequestMapping("/aluno")
+@RestController
+@RequestMapping("/alunos")
 public class AlunoController {
 
     private final AlunoService aService;
