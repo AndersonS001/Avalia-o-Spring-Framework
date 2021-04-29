@@ -11,6 +11,8 @@ import br.com.fiap.avaliacaospring.model.AlunoModel;
 import br.com.fiap.avaliacaospring.service.AlunoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 
 @RestController
 @RequestMapping("/alunos")
@@ -25,8 +27,8 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    @ApiOperation(value = "Cadastra um aluno")
-    public void cadastraAluno(@RequestBody AlunoModel aluno) {
+    @Operation(summary = "Cadastra um aluno")
+    public void cadastraAluno(@Parameter(description = "Objeto do aluno cadastrado") @RequestBody AlunoModel aluno) {
         aService.cadastraAluno(aluno);
     }
 

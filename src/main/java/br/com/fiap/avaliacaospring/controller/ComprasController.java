@@ -15,6 +15,8 @@ import br.com.fiap.avaliacaospring.model.CompraModel;
 import br.com.fiap.avaliacaospring.service.CompraService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 
 @RestController
 @RequestMapping("/compras")
@@ -29,14 +31,15 @@ public class ComprasController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    @ApiOperation(value = "Cadastra a compra de um aluno")
-    public void compraAluno(@RequestBody CompraModel compra) {
+    @Operation(summary = "Cadastra a compra de um aluno")
+    public void compraAluno(
+            @Parameter(description = "Objeto de modelo de uma compra") @RequestBody CompraModel compra) {
         cService.compraAluno(compra);
     }
 
     @GetMapping
-    @ApiOperation(value = "Obtem o extrato das compras de um aluno pelo RA")
-    public List<CompraModel> extrato(@RequestParam long ra) {
+    @Operation(summary = "Obtem o extrato das compras de um aluno pelo RA")
+    public List<CompraModel> extrato(@Parameter(description = "RA do aluno pesquisado") @RequestParam long ra) {
         return cService.extrato(ra);
     }
 
