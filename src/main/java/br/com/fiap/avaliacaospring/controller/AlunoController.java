@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.avaliacaospring.model.AlunoModel;
 import br.com.fiap.avaliacaospring.service.AlunoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/alunos")
+@Api(value = "Aluno Controller")
 public class AlunoController {
 
     private final AlunoService aService;
@@ -22,6 +25,7 @@ public class AlunoController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
+    @ApiOperation(value = "Cadastra um aluno")
     public void cadastraAluno(@RequestBody AlunoModel aluno) {
         aService.cadastraAluno(aluno);
     }

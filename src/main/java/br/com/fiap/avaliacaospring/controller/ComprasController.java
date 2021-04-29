@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.avaliacaospring.model.CompraModel;
 import br.com.fiap.avaliacaospring.service.CompraService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/compras")
+@Api(value = "Compras Controller")
 public class ComprasController {
 
     private final CompraService cService;
@@ -26,11 +29,13 @@ public class ComprasController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
+    @ApiOperation(value = "Cadastra a compra de um aluno")
     public void compraAluno(@RequestBody CompraModel compra) {
         cService.compraAluno(compra);
     }
 
     @GetMapping
+    @ApiOperation(value = "Obtem o extrato das compras de um aluno pelo RA")
     public List<CompraModel> extrato(@RequestParam long ra) {
         return cService.extrato(ra);
     }
