@@ -1,5 +1,6 @@
 package br.com.fiap.avaliacaospring.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,8 +42,10 @@ public class CompraService {
 
         AlunoDomain aluno = obtemAluno(ra);
 
-        return aluno.getCompras().stream().map(x -> new CompraModel(x.getValor(), x.getRa(), x.getNomeLoja()))
-                .collect(Collectors.toList());
+        List<CompraDomain> compras = aluno.getCompras();
+
+        return compras != null ? compras.stream().map(x -> new CompraModel(x.getValor(), x.getRa(), x.getNomeLoja()))
+                .collect(Collectors.toList()) : Collections.emptyList();
 
     }
 

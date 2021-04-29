@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.avaliacaospring.model.CompraModel;
 import br.com.fiap.avaliacaospring.service.CompraService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 
