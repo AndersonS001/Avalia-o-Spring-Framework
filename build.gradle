@@ -30,6 +30,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.1'
 }
 
 test {
