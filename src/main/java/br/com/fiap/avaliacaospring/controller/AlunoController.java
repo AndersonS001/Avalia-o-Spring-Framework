@@ -1,6 +1,9 @@
 package br.com.fiap.avaliacaospring.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +32,13 @@ public class AlunoController {
     @Operation(summary = "Cadastra um aluno")
     public void cadastraAluno(@Parameter(description = "Objeto do aluno cadastrado") @RequestBody AlunoModel aluno) {
         aService.cadastraAluno(aluno);
+    }
+
+    
+    @GetMapping
+    @Operation(summary = "Lista todos os alunos")
+    public List<AlunoModel> getAlunos() {
+        return aService.getAlunos();
     }
 
 }

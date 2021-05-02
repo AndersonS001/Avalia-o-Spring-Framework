@@ -1,5 +1,8 @@
 package br.com.fiap.avaliacaospring.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.avaliacaospring.domain.AlunoDomain;
@@ -18,6 +21,10 @@ public class AlunoService {
     public void cadastraAluno(AlunoModel aluno) {
         aRepository.save(new AlunoDomain(aluno.getNome(), aluno.getRa()));
     }
-    
+
+    public List<AlunoModel> getAlunos() {
+        return aRepository.findAll().stream().map(x -> new AlunoModel(x.getNome(), x.getRa()))
+                .collect(Collectors.toList());
+    }
 
 }

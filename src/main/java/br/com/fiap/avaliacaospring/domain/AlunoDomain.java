@@ -19,11 +19,10 @@ public class AlunoDomain {
     }
 
     @Id
-    private String id;
+    private long ra;
 
     private String nome;
 
-    private long ra;
 
     @DBRef
     private List<CompraDomain> compras;
