@@ -15,9 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import br.com.fiap.avaliacaospring.domain.AlunoDomain;
+import br.com.fiap.avaliacaospring.domain.ClientePotencialDomain;
 import br.com.fiap.avaliacaospring.model.AlunoModel;
-import br.com.fiap.avaliacaospring.repository.AlunoRepository;
+import br.com.fiap.avaliacaospring.repository.ClientePotencialRepository;
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -27,15 +27,13 @@ public class BatchConfiguration {
 
     public final JobBuilderFactory jobBuilderFactory;
     public final StepBuilderFactory stepBuilderFactory;
-    private final AlunoRepository repository;
+    private final ClientePotencialRepository repository;
 
     @Bean
     public FlatFileItemReader<AlunoModel> reader() {
         return new FlatFileItemReaderBuilder<AlunoModel>().name("alunoItemReader")
-                .resource(new ClassPathResource("potenciasclients.txt"))
-                .delimited()
-                .names(new String[] { "nome", "ra" })
-                .fieldSetMapper(new BeanWrapperFieldSetMapper<AlunoModel>() {
+                .resource(new ClassPathResource("potenciasclients.txt")).delimited()
+                .names(new String[] { "nome", "ra" }).fieldSetMapper(new BeanWrapperFieldSetMapper<AlunoModel>() {
                     {
                         setTargetType(AlunoModel.class);
                     }
@@ -48,23 +46,21 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public RepositoryItemWriter<AlunoDomain> writer() {
+    public RepositoryItemWriter<ClientePotencialDomain> writer() {
 
-        return new RepositoryItemWriterBuilder<AlunoDomain>().repository(this.repository).methodName("save").build();
+        return new RepositoryItemWriterBuilder<ClientePotencialDomain>().repository(this.repository).methodName("save")
+                .build();
     }
 
     @Bean
     public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-        return jobBuilderFactory.get("importUserJob")
-                .incrementer(new RunIdIncrementer())
-                .listener(listener)
-                .flow(step1)
+        return jobBuilderFactory.get("importUserJob").incrementer(new RunIdIncrementer()).listener(listener).flow(step1)
                 .end().build();
     }
 
     @Bean
-    public Step step1(RepositoryItemWriter<AlunoDomain> writer) {
-        return stepBuilderFactory.get("step1").<AlunoModel, AlunoDomain>chunk(10).reader(reader())
+    public Step step1(RepositoryItemWriter<ClientePotencialDomain> writer) {
+        return stepBuilderFactory.get("step1").<AlunoModel, ClientePotencialDomain>chunk(10).reader(reader())
                 .processor(processor()).writer(writer).build();
     }
 
