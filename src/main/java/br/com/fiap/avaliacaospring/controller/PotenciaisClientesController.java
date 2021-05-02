@@ -9,9 +9,10 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -22,7 +23,8 @@ public class PotenciaisClientesController {
 
     private final Job job;
 
-    @PostMapping(value = "/potenciais_clientes")
+    @GetMapping(value = "/potenciais_clientes")
+    @Operation(summary = "Rota para iniciar batch de cadastro de potenciais clientes")
     public void uploadFileHandler() throws JobExecutionAlreadyRunningException, JobRestartException,
             JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 
