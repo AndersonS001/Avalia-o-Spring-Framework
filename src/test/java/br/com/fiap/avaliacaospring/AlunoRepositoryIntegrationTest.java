@@ -33,22 +33,3 @@ public class AlunoRepositoryIntegrationTest {
                 .containsOnly("ANDERSON");
     }
 }
-
-/*
-    @DisplayName("given object to save"
-            + " when save object using MongoDB template"
-            + " then object is saved")
-    @Test
-    public void whenFindByRa_returnAluno(@Autowired MongoTemplate mongoTemplate){
-        DBObject objectToSave = BasicDBObjectBuilder.start()
-                .add("key","value")
-                .get();
-
-        mongoTemplate.save(objectToSave, "collection");
-
-        assertThat(mongoTemplate.findAll(DBObject.class, "collection")).extracting("key")
-                .containsOnly("value");
-
-
-    }*/
-
