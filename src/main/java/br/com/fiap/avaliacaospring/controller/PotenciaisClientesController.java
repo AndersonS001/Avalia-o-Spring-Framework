@@ -1,6 +1,7 @@
 package br.com.fiap.avaliacaospring.controller;
 
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.JobParametersInvalidException;
@@ -22,9 +23,11 @@ public class PotenciaisClientesController {
     private final Job job;
 
     @PostMapping(value = "/potenciais_clientes")
-    public void uploadFileHandler() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
+    public void uploadFileHandler() throws JobExecutionAlreadyRunningException, JobRestartException,
+            JobInstanceAlreadyCompleteException, JobParametersInvalidException {
 
-        JobParameters paramJobParameters = new JobParametersBuilder().toJobParameters();
+        JobParameters paramJobParameters = new JobParametersBuilder()
+                .addParameter("time", new JobParameter(System.currentTimeMillis())).toJobParameters();
 
         jobLauncher.run(job, paramJobParameters);
     }

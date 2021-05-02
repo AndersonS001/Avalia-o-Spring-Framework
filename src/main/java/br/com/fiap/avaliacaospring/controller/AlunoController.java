@@ -3,6 +3,7 @@ package br.com.fiap.avaliacaospring.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,13 @@ public class AlunoController {
     @Operation(summary = "Lista todos os alunos")
     public List<AlunoModel> getAlunos() {
         return aService.getAlunos();
+    }
+
+    @DeleteMapping
+    @Operation(summary = "Deleta todos os alunos")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAlunos(){
+        aService.deleteAlunos();
     }
 
 }

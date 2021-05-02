@@ -27,4 +27,8 @@ public class AlunoService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteAlunos() {
+        aRepository.deleteAll();
+    }
+
 }
